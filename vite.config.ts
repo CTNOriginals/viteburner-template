@@ -16,6 +16,15 @@ export default defineConfig({
   },
   viteburner: {
     watch: [{ pattern: 'src/**/*.{js,ts}', transform: true }, { pattern: 'src/**/*.{script,txt}' }],
-    sourcemap: 'inline',
+    sourcemap: 'hidden',
+	download: {
+		server: ['home'],
+		location: (file, server) => {
+			if (file.endsWith('.js')) {
+				return `dist/${server}/${file}`;
+			}
+			return null;
+		}
+	},
   },
 });
